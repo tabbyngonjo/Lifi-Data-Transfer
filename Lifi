@@ -1,0 +1,70 @@
+#include <iostream>
+#include <string>
+
+// Function to convert a string to binary
+std::string stringToBinary(const std::string& text) {
+    std::string binaryString;
+    for (char c : text) {
+        std::bitset<8> binaryChar(c);
+        binaryString += binaryChar.to_string();
+    }
+    return binaryString;
+}
+
+// Function to convert binary to string
+std::string binaryToString(const std::string& binaryString) {
+    std::string text;
+    std::bitset<8> binaryChar;
+    for (size_t i = 0; i < binaryString.length(); i += 8) {
+        binaryChar = std::bitset<8>(binaryString.substr(i, 8));
+        text += static_cast<char>(binaryChar.to_ulong());
+    }
+    return text;
+}
+
+// Function to transmit data using Li-Fi
+void transmitData(const std::string& data) {
+    // Convert the data to binary
+    std::string binaryData = stringToBinary(data);
+
+    // Transmit the binary data using Li-Fi
+    for (char bit : binaryData) {
+        if (bit == '0') {
+            // Simulate sending a 0 bit using Li-Fi
+            std::cout << "Sending 0 bit using Li-Fi" << std::endl;
+        } else if (bit == '1') {
+            // Simulate sending a 1 bit using Li-Fi
+            std::cout << "Sending 1 bit using Li-Fi" << std::endl;
+        } else {
+            // Ignore non-binary characters
+        }
+    }
+}
+
+// Function to receive data using Li-Fi
+std::string receiveData() {
+    std::string receivedData;
+
+    // Simulate receiving data using Li-Fi
+    // Assume a pre-defined sequence of bits is received
+    std::string receivedBits = "010001010100011001010100";
+
+    // Convert the received bits to string
+    receivedData = binaryToString(receivedBits);
+
+    return receivedData;
+}
+
+int main() {
+    std::string data = "Hello, Li-Fi!"; // Data to be transmitted
+
+    // Transmit data using Li-Fi
+    std::cout << "Transmitting data: " << data << std::endl;
+    transmitData(data);
+
+    // Receive data using Li-Fi
+    std::string receivedData = receiveData();
+    std::cout << "Received data: " << receivedData << std::endl;
+
+    return 0;
+}
